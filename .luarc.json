@@ -1,5 +1,3 @@
 {
-    "diagnostics.globals": [
-        "P"
-    ]
+    "diagnostics.globals": ["P"]
 }

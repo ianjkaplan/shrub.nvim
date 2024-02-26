@@ -1,30 +1,22 @@
+local actions = require("shrub.actions")
+local default_config = require("shrub.config")
 local M = {}
 
--- local function get_filetype()
---     local ft = vim.bo.filetype
---     if ft ~= "javascript" and ft ~= "typescript" then
---         error("Shrubs is only supported for javascript and typescript files")
---     end
--- end
+--- TODO: do buffer specific setup here
 
--- (arrow_function
---     body: (_) @body)
-function Q()
-    -- local ft = get_filetype()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local tree = vim.treesitter.get_parser(bufnr, "javascript")
-    local root = tree:parse()[1]
-
-    local query = vim.treesitter.parse_query(
-        "javascript",
-        [[
-(arrow_function
-    body: (_) @body)
-]]
+M.statement_block_surround = function()
+    actions.statement_block_surround(
+        vim.api.nvim_get_current_buf(),
+        vim.treesitter.get_node()
     )
+end
 
-    for _, captures in query:iter_captures(root, bufnr) do
-        P(captures)
+--- accepts a config table with a keys field to override default keybindings
+--- @param config table | nil
+M.setup = function(config)
+    config = config or default_config
+    for _, key in ipairs(config.keys or default_config.keys) do
+        vim.api.nvim_set_keymap(unpack(key))
     end
 end
 

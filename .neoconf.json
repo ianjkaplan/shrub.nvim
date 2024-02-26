@@ -1,5 +1,8 @@
 {
     "neodev": {
-        "library": {}
+        "library": {
+            "enabled": true,
+            "plugins": ["plenary.nvim", "nvim-treesitter"]
+        }
     }
 }
