@@ -1,5 +1,6 @@
 ---@diagnostic disable: deprecated
--- Run tests with :PlenaryBustedFile %
+-- Run tests with source :PlenaryBustedFile %
+-- Make sure to have the treesitter parser for javascript installed and in your runtimepath
 describe("statement_block_surround", function()
     local test_table = {
         {
