@@ -5,7 +5,14 @@ local M = {}
 --- TODO: do buffer specific setup here
 
 M.statement_block_surround = function()
-    actions.statement_block_surround_remove(
+    actions.statement_block_surround(
+        vim.api.nvim_get_current_buf(),
+        vim.treesitter.get_node()
+    )
+end
+
+M.statement_block_surround_undo = function()
+    actions.statement_block_surround_undo(
         vim.api.nvim_get_current_buf(),
         vim.treesitter.get_node()
     )

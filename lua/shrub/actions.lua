@@ -69,7 +69,7 @@ end
 --- @param node TSNode|nil
 --- @return boolean True the action updated the buffer, false otherwise
 M.statement_block_surround_undo = function(bufnr, node)
-    node = utils.get_ts_node(node)
+    node = M._get_current_node(node)
 
     local ft = vim.bo[bufnr].filetype
     if not utils.check_filetype(ft) then
@@ -89,16 +89,50 @@ M.statement_block_surround_undo = function(bufnr, node)
         ft,
         [[
         (arrow_function
-            body: (_) @body)
-        (if_statement 
-        consequence: (_) @body
-        )
+            body: (statement_block (return_statement (_) @return_val) ) @body
+            ) 
+        (if_statement
+            consequence: (statement_block (return_statement (_) @return_val)) @body
+            )
         ]]
     )
+
+    -- get the statement block and the return statement
+    ---@type TSNode|nil
+    local stament_block = nil
+    ---@type TSNode|nil
+    local return_val = nil
     for _, n in query:iter_captures(node, bufnr, 0, -1) do
-        print("todo", n)
+        if stament_block ~= nil and return_val ~= nil then
+            break
+        end
+        if n:type() == "statement_block" then
+            stament_block = n
+        else
+            return_val = n
+        end
     end
-    return false
+
+    if stament_block == nil or return_val == nil then
+        return false
+    end
+
+    utils.replace_ts_node_text(bufnr, stament_block, function()
+        -- get range from the return statement
+        local start_row, start_col, end_row, end_col = return_val:range()
+        local new_text = vim.api.nvim_buf_get_text(
+            bufnr,
+            start_row,
+            start_col,
+            end_row,
+            end_col,
+            {}
+        )
+        return node:type() == "arrow_function" and new_text[1]
+            or "return " .. new_text[1] .. ";"
+    end)
+
+    return true
 end
 
 return M
