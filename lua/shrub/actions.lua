@@ -40,7 +40,7 @@ M.statement_block_surround = function(bufnr, node)
         [[
         (arrow_function
             body: (_) @body)
-        (if_statement 
+        (if_statement
         consequence: (_) @body
         )
         ]]
@@ -90,7 +90,7 @@ M.statement_block_surround_undo = function(bufnr, node)
         [[
         (arrow_function
             body: (statement_block (return_statement (_) @return_val) ) @body
-            ) 
+            )
         (if_statement
             consequence: (statement_block (return_statement (_) @return_val)) @body
             )
