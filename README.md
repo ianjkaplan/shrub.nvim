@@ -15,7 +15,7 @@
 
 -   [x] convert between implicit and explicit arrow function return statements
 -   [x] add/remove braces from conditional statements
--   [ ] convert between arrow and function expressions
+-   [ ] convert between arrow and function declaration
 
 ## 📦 Installation
 
