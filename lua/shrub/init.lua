@@ -2,6 +2,7 @@ local actions = require("shrub.actions")
 local default_config = require("shrub.config")
 local M = {}
 
+---@param action ShrubAction
 M._run_action = function(action)
     actions.run(
         action,
@@ -16,6 +17,14 @@ end
 
 M.statement_block_remove = function()
     M._run_action("statement_block_remove")
+end
+
+M.fun_declaration_to_arrow = function()
+    M._run_action("fun_declaration_to_arrow")
+end
+
+M.arrow_fun_to_declaration = function()
+    M._run_action("arrow_fun_to_declaration")
 end
 
 --- accepts a config table with a keys field to override default keybindings

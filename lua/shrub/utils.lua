@@ -19,6 +19,18 @@ M.find_nearest_parent_ts_node = function(node, types)
     return nil
 end
 
+M.get_ts_node_text = function(bufnr, node)
+    local start_row, start_col, end_row, end_col = node:range()
+    return vim.api.nvim_buf_get_text(
+        bufnr,
+        start_row,
+        start_col,
+        end_row,
+        end_col,
+        {}
+    )
+end
+
 ---@param bufnr integer
 ---@param node TSNode
 ---@param callback function accepts a string[] and returns a string to replace the node text with

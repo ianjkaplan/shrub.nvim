@@ -23,6 +23,16 @@ M.keys = {
             desc = "intelligent remove surrounding statement block",
         },
     },
+    {
+        "n",
+        "<leader>jfa",
+        '<cmd>lua require"shrub".fun_declaration_to_arrow()<cr>',
+        {
+            noremap = true,
+            silent = true,
+            desc = "convert a function declaration to an arrow function",
+        },
+    },
 }
 
 return M

@@ -31,6 +31,13 @@ describe("Actions:", function()
             after = [[if (true) return "something";]],
             pos = { 0, 20 },
         },
+        {
+            action = "fun_declaration_to_arrow",
+            description = "chould convert a function declaration to an arrow function",
+            before = [[function myFn() { return "success"; }]],
+            after = [[const myFn = () => { return "success"; }]],
+            pos = { 0, 20 },
+        },
     }
 
     for _, test in ipairs(test_table) do
