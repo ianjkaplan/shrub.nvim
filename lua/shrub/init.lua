@@ -2,20 +2,20 @@ local actions = require("shrub.actions")
 local default_config = require("shrub.config")
 local M = {}
 
---- TODO: do buffer specific setup here
-
-M.statement_block_surround = function()
-    actions.statement_block_surround(
+M._run_action = function(action)
+    actions.run(
+        action,
         vim.api.nvim_get_current_buf(),
         vim.treesitter.get_node()
     )
 end
 
-M.statement_block_surround_undo = function()
-    actions.statement_block_surround_undo(
-        vim.api.nvim_get_current_buf(),
-        vim.treesitter.get_node()
-    )
+M.statement_block_surround = function()
+    M._run_action("statement_block_surround")
+end
+
+M.statement_block_remove = function()
+    M._run_action("statement_block_remove")
 end
 
 --- accepts a config table with a keys field to override default keybindings

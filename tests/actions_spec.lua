@@ -1,15 +1,31 @@
 ---@diagnostic disable: deprecated
 -- Run tests with source :PlenaryBustedFile %
 -- Make sure to have the treesitter parser for javascript installed and in your runtimepath
-describe("statement_block_surround_undo", function()
+describe("Actions:", function()
     local test_table = {
         {
+            action = "statement_block_surround",
+            description = "should surround the arrow function with brackets",
+            before = [[const myFn = () => "success";]],
+            after = [[const myFn = () => { return "success"; };]],
+            pos = { 0, 25 },
+        },
+        {
+            action = "statement_block_surround",
+            description = "should surround the condition with brackets",
+            before = [[if (true) return "something";]],
+            after = [[if (true) { return "something"; }]],
+            pos = { 0, 20 },
+        },
+        {
+            action = "statement_block_remove",
             description = "should surround the arrow function with brackets",
             before = [[const myFn = () => { return "success"; };]],
             after = [[const myFn = () => "success";]],
             pos = { 0, 25 },
         },
         {
+            action = "statement_block_remove",
             description = "should surround the condition with brackets",
             before = [[if (true) { return "something"; }]],
             after = [[if (true) return "something";]],
@@ -29,10 +45,7 @@ describe("statement_block_surround_undo", function()
                 pos = test.pos,
             })
             assert.is_true(
-                require("shrub.actions").statement_block_surround_undo(
-                    test_buf,
-                    node
-                )
+                require("shrub.actions").run(test.action, test_buf, node)
             )
             assert.equals(
                 test.after,
