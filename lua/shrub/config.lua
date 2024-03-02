@@ -16,7 +16,7 @@ M.keys = {
     {
         "n",
         "<leader>jir",
-        '<cmd>lua require"shrub".statement_block_surround_undo()<cr>',
+        '<cmd>lua require"shrub".statement_block_remove()<cr>',
         {
             noremap = true,
             silent = true,
@@ -31,6 +31,16 @@ M.keys = {
             noremap = true,
             silent = true,
             desc = "convert a function declaration to an arrow function",
+        },
+    },
+    {
+        "n",
+        "<leader>jaf",
+        '<cmd>lua require"shrub".arrow_fun_to_declaration()<cr>',
+        {
+            noremap = true,
+            silent = true,
+            desc = "convert an arrow function to a function declaration",
         },
     },
 }

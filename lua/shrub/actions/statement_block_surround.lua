@@ -8,7 +8,7 @@ local M = {
             body: (_) @arrow_body)
         (if_statement
         consequence: (_) @condition_body
-        ) 
+        )
         ]],
     handle_captures = function(captures, bufnr)
         if captures["condition_body"] ~= nil then

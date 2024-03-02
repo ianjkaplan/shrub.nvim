@@ -4,6 +4,7 @@ local M = {
     _ft = "typescript",
 }
 
+--- register a new action as config
 ---@type table<ShrubAction, ShrubActionConfig>
 local shrub_actions = {
     statement_block_surround = require(
@@ -13,7 +14,7 @@ local shrub_actions = {
     fun_declaration_to_arrow = require(
         "shrub.actions.fun_declaration_to_arrow"
     ),
-    arrow_to_function_declaration = require(
+    arrow_fun_to_declaration = require(
         "shrub.actions.arrow_fun_to_declaration"
     ),
 }

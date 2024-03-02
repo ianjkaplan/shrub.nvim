@@ -33,10 +33,17 @@ describe("Actions:", function()
         },
         {
             action = "fun_declaration_to_arrow",
-            description = "chould convert a function declaration to an arrow function",
+            description = "should convert a function declaration to an arrow function",
             before = [[function myFn() { return "success"; }]],
             after = [[const myFn = () => { return "success"; }]],
             pos = { 0, 20 },
+        },
+        {
+            action = "arrow_fun_to_declaration",
+            description = "should convert an arrow function to a function declaration",
+            before = [[const myFn = () => { return "success"; }]],
+            after = [[function myFn() { return "success"; }]],
+            pos = { 0, 25 },
         },
     }
 
