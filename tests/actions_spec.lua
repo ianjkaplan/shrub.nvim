@@ -1,7 +1,11 @@
+local mock = require("luassert.mock")
 ---@diagnostic disable: deprecated
 -- Run tests with source :PlenaryBustedFile %
 -- Make sure to have the treesitter parser for javascript installed and in your runtimepath
 describe("Actions:", function()
+    local conform_mock = mock(require("shrub.format"), true)
+    conform_mock.format.returns(true)
+
     local test_table = {
         {
             action = "statement_block_surround",

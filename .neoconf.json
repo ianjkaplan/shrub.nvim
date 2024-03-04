@@ -2,7 +2,7 @@
     "neodev": {
         "library": {
             "enabled": true,
-            "plugins": ["plenary.nvim", "nvim-treesitter"]
+            "plugins": ["plenary.nvim", "nvim-treesitter", "conform.nvim"]
         }
     }
 }
