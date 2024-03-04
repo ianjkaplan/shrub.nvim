@@ -3,7 +3,7 @@ local default_config = require("shrub.config")
 local M = {}
 
 ---@param action ShrubAction
-M._run_action = function(action)
+local run = function(action)
     actions.run(
         action,
         vim.api.nvim_get_current_buf(),
@@ -12,19 +12,19 @@ M._run_action = function(action)
 end
 
 M.statement_block_surround = function()
-    M._run_action("statement_block_surround")
+    run("statement_block_surround")
 end
 
 M.statement_block_remove = function()
-    M._run_action("statement_block_remove")
+    run("statement_block_remove")
 end
 
 M.fun_declaration_to_arrow = function()
-    M._run_action("fun_declaration_to_arrow")
+    run("fun_declaration_to_arrow")
 end
 
 M.arrow_fun_to_declaration = function()
-    M._run_action("arrow_fun_to_declaration")
+    run("arrow_fun_to_declaration")
 end
 
 --- accepts a config table with a keys field to override default keybindings

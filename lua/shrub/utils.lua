@@ -1,4 +1,5 @@
 local config = require("shrub.config")
+local format = require("shrub.format").format
 local M = {}
 
 ---@param filetype string
@@ -52,7 +53,10 @@ M.replace_ts_node_text = function(bufnr, node, callback)
     vim.api.nvim_buf_set_text(bufnr, start_row, start_col, end_row, end_col, {
         result,
     })
-    return true
+
+    return format({
+        bufnr = bufnr,
+    })
 end
 
 return M
