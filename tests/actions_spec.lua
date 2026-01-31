@@ -50,13 +50,14 @@ describe("Actions:", function()
             pos = { 0, 25 },
         },
     }
-
     for _, test in ipairs(test_table) do
         it(test.description, function()
             local test_buf = vim.api.nvim_create_buf(false, true)
             vim.api.nvim_buf_set_option(test_buf, "filetype", "javascript")
             -- write the js code to the buffer
             vim.api.nvim_buf_set_lines(test_buf, 0, -1, false, { test.before })
+            -- treesitter will parse the buffer
+            vim.treesitter.get_parser(test_buf, "javascript"):parse()
             local node = vim.treesitter.get_node({
                 lang = "javascript",
                 bufnr = test_buf,
